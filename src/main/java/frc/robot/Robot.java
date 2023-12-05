@@ -17,6 +17,10 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
+  WPI_VictorSPX L = new WPI_VictorSPX(12);
+  WPI_VictorSPX R = new WPI_VictorSPX(13);
+  //WPI_VictorSPX top = new WPI_VictorSPX(12);
+  Joystick joy = new Joystick(0);
   @Override
   public void robotInit() {}
 
