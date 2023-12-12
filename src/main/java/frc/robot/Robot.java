@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 
 /**
@@ -19,7 +22,7 @@ public class Robot extends TimedRobot {
    */
   WPI_VictorSPX L = new WPI_VictorSPX(12);
   WPI_VictorSPX R = new WPI_VictorSPX(13);
-  //WPI_VictorSPX top = new WPI_VictorSPX(12);
+  WPI_VictorSPX top = new WPI_VictorSPX(12);
   Joystick joy = new Joystick(0);
   @Override
   public void robotInit() {}
@@ -37,7 +40,17 @@ public class Robot extends TimedRobot {
   public void teleopInit() {}
 
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    L.set(joy.getRawAxis(1));
+    R.set(joy.getRawAxis(5));
+    if(joy.getRawButtonPressed(0)){
+     top.set(0.2);
+   } else if(joy.getRawButtonPressed(1)){
+     top.set(0.5);
+   } else if(joy.getRawButtonPressed(2)){
+     top.set(0.7);
+   }}
+  
 
   @Override
   public void disabledInit() {}
