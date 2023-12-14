@@ -8,65 +8,86 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 
 /**
- * The VM is configured to automatically run this class, and to call the functions corresponding to
- * each mode, as described in the TimedRobot documentation. If you change the name of this class or
- * the package after creating this project, you must also update the build.gradle file in the
+ * The VM is configured to automatically run this class, and to call the
+ * functions corresponding to
+ * each mode, as described in the TimedRobot documentation. If you change the
+ * name of this class or
+ * the package after creating this project, you must also update the
+ * build.gradle file in the
  * project.
  */
 public class Robot extends TimedRobot {
   /**
-   * This function is run when the robot is first started up and should be used for any
+   * This function is run when the robot is first started up and should be used
+   * for any
    * initialization code.
    */
-  WPI_VictorSPX L = new WPI_VictorSPX(12);
-  WPI_VictorSPX R = new WPI_VictorSPX(13);
-  WPI_VictorSPX top = new WPI_VictorSPX(12);
+  // VictorSP L = new VictorSP(6);
+  // VictorSP R = new VictorSP(7);
+  // WPI_VictorSPX top = new WPI_VictorSPX(12);
   Joystick joy = new Joystick(0);
-  @Override
-  public void robotInit() {}
 
   @Override
-  public void robotPeriodic() {}
+  public void robotInit() {
+    auto.setting();
+  }
 
   @Override
-  public void autonomousInit() {}
+  public void robotPeriodic() {
+  }
 
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousInit() {
+    auto.start();
+
+  }
 
   @Override
-  public void teleopInit() {}
+  public void autonomousPeriodic() {
+    auto.loop();
+  }
+
+  @Override
+  public void teleopInit() {
+  }
 
   @Override
   public void teleopPeriodic() {
-    L.set(joy.getRawAxis(1));
-    R.set(joy.getRawAxis(5));
-    if(joy.getRawButtonPressed(0)){
-     top.set(0.2);
-   } else if(joy.getRawButtonPressed(1)){
-     top.set(0.5);
-   } else if(joy.getRawButtonPressed(2)){
-     top.set(0.7);
-   }}
-  
+    // L.set(-joy.getRawAxis(1));
+    // R.set(joy.getRawAxis(5));
+    // if (joy.getRawButtonPressed(0)) {
+    //   top.set(0.2);
+    // } else if (joy.getRawButtonPressed(1)) {
+    //   top.set(0.5);
+    // } else if (joy.getRawButtonPressed(2)) {
+    //   top.set(0.7);
+    // }
+  }
 
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+  }
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+  }
 
   @Override
-  public void testInit() {}
+  public void testInit() {
+  }
 
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+  }
 
   @Override
-  public void simulationInit() {}
+  public void simulationInit() {
+  }
 
   @Override
-  public void simulationPeriodic() {}
+  public void simulationPeriodic() {
+  }
 }
