@@ -28,7 +28,7 @@ public class Robot extends TimedRobot {
   // VictorSP L = new VictorSP(6);
   // VictorSP R = new VictorSP(7);
   // WPI_VictorSPX top = new WPI_VictorSPX(12);
-  Joystick joy = new Joystick(0);
+  // Joystick joy = new Joystick(0);
 
   @Override
   public void robotInit() {
@@ -51,20 +51,11 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void teleopInit() {
-  }
+  public void teleopInit() {}
 
   @Override
   public void teleopPeriodic() {
-    // L.set(-joy.getRawAxis(1));
-    // R.set(joy.getRawAxis(5));
-    // if (joy.getRawButtonPressed(0)) {
-    //   top.set(0.2);
-    // } else if (joy.getRawButtonPressed(1)) {
-    //   top.set(0.5);
-    // } else if (joy.getRawButtonPressed(2)) {
-    //   top.set(0.7);
-    // }
+    teleop.loop();
   }
 
   @Override
