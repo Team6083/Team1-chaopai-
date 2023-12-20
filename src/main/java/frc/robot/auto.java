@@ -21,8 +21,8 @@ public class auto {
     // public static WPI_VictorSPX L = new WPI_VictorSPX(6);
     // public static WPI_VictorSPX R = new WPI_VictorSPX(7);
     // public static WPI_VictorSPX top = new WPI_VictorSPX(0);
-    public static VictorSP L = new VictorSP(6);
-    public static VictorSP R = new VictorSP(7);
+    public static VictorSP L = new VictorSP(2);
+    public static VictorSP R = new VictorSP(3);
 
     //public static AHRS gyro = new AHRS(SPI.Port.kMXP);
     public static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
@@ -37,26 +37,29 @@ public class auto {
 
     public static void start() {
         SmartDashboard.putData("Auto Choise", chooser);
-        autoselected = chooser.getSelected();
+       // autoselected = chooser.getSelected();
         gyro.reset();
         timer.reset();
         timer.start();
     }
 
     public static void loop() {
-        switch (autoselected) {
+        switch (chooser.getSelected()) {
             case kshootball:
                 kshootball();
+                break;
             case donothing:
                 L.set(0);
                 R.set(0);
+                break;
             case outcommunity:
                     if (timer.get() < 3) {
-                        L.set(-0.5);
-                        R.set(0.5);
+                        L.set(0.5);
+                        R.set(-0.5);
                     } else {
                         timer.stop();
                     }
+                    break;
 
                 
         }
@@ -95,8 +98,8 @@ public class auto {
         if (a == 0) {
 
             if (timer.get() < 15) {
-                L.set(-0.2);
-                R.set(0.2   );
+                L.set(0.2);
+                R.set(-0.2);
             } else {
                 timer.stop();
                 a = 1;
@@ -104,8 +107,8 @@ public class auto {
 
         } else if (a == 1) {
          if(gyro.getAngle()>90){
-            L.set(-0.3);
-            R.set(-0.3);
+            L.set(0.3);
+            R.set(0.3);
          } else{
             a=2;
             timer.reset();
@@ -114,8 +117,8 @@ public class auto {
 
         }else if(a==2){
              if (timer.get() < 3) {
-                L.set(-0.2);
-                R.set(0.2);
+                L.set(0.2);
+                R.set(-0.2);
             } else {
                 timer.reset();
                 timer.start();
@@ -123,7 +126,7 @@ public class auto {
             }
         }else if (a==3){
             if(timer.get()<5){
-           // top.set(0.2);
+           // top.set(0.2);     
         }else{
             a=4;
         }
