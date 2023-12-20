@@ -13,15 +13,16 @@ public class teleop {
     public static VictorSP R = new VictorSP(7);
 
     public static Joystick joy = new Joystick(0);
-    public static void loop(){
-    L.set(-joy.getRawAxis(1));
-    R.set(joy.getRawAxis(5));
-    // if (joy.getRawButtonPressed(0)) {
-    //   top.set(0.2);
-    // } else if (joy.getRawButtonPressed(1)) {
-    //   top.set(0.5);
-    // } else if (joy.getRawButtonPressed(2)) {
-    //   top.set(0.7);
-    // }
+
+    public static void loop() {
+        L.set(-joy.getRawAxis(1));
+        R.set(joy.getRawAxis(5));
+        // if (joy.getRawButtonPressed(0)) {
+        // top.set(0.2);
+        // } else if (joy.getRawButtonPressed(1)) {
+        // top.set(0.5);
+        // } else if (joy.getRawButtonPressed(2)) {
+        // top.set(0.7);
+        // }
     }
 }

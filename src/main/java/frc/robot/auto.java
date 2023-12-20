@@ -3,6 +3,7 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 // import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Timer;
@@ -23,7 +24,8 @@ public class auto {
     public static VictorSP L = new VictorSP(6);
     public static VictorSP R = new VictorSP(7);
 
-    public static AHRS gyro = new AHRS(SPI.Port.kMXP);
+    //public static AHRS gyro = new AHRS(SPI.Port.kMXP);
+    public static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 
     public static int a = 0;
 
@@ -35,14 +37,14 @@ public class auto {
 
     public static void start() {
         SmartDashboard.putData("Auto Choise", chooser);
-       // autoselected = chooser.getSelected();
+        autoselected = chooser.getSelected();
         gyro.reset();
         timer.reset();
         timer.start();
     }
 
     public static void loop() {
-        switch (chooser.getSelected()) {
+        switch (autoselected) {
             case kshootball:
                 kshootball();
             case donothing:
