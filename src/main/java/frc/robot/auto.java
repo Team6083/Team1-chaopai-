@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class auto {
-    public static SendableChooser<String> chooser = new SendableChooser<String>();
+    public static SendableChooser<String> chooser = new SendableChooser<>();
     public static final String kshootball = "shootball";
     public static final String outcommunity = "outcommunity";
     public static final String donothing = "donothing";
@@ -21,8 +21,8 @@ public class auto {
     // public static WPI_VictorSPX L = new WPI_VictorSPX(6);
     // public static WPI_VictorSPX R = new WPI_VictorSPX(7);
     // public static WPI_VictorSPX top = new WPI_VictorSPX(0);
-    public static VictorSP L = new VictorSP(2);
-    public static VictorSP R = new VictorSP(3);
+    public static VictorSP L = new VictorSP(0);
+    public static VictorSP R = new VictorSP(1);
 
     //public static AHRS gyro = new AHRS(SPI.Port.kMXP);
     public static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
@@ -60,6 +60,7 @@ public class auto {
                         timer.stop();
                     }
                     break;
+            default:
 
                 
         }
@@ -97,11 +98,13 @@ public class auto {
         // }
         if (a == 0) {
 
-            if (timer.get() < 15) {
-                L.set(0.2);
-                R.set(-0.2);
+            if (timer.get() < 7) {
+                L.set(0.7);
+                R.set(-0.7);
             } else {
                 timer.stop();
+                L.set(0);
+                R.set(0);
                 a = 1;
             }
 
@@ -113,15 +116,19 @@ public class auto {
             a=2;
             timer.reset();
             timer.start();
+            L.set(0);
+            R.set(0);
          }
 
         }else if(a==2){
-             if (timer.get() < 3) {
+             if (timer.get() < 1) {
                 L.set(0.2);
                 R.set(-0.2);
             } else {
                 timer.reset();
                 timer.start();
+                L.set(0);
+                R.set(0);
                 a = 3;
             }
         }else if (a==3){
