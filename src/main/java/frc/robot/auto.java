@@ -18,14 +18,14 @@ public class auto {
     public static final String donothing = "donothing";
     public static String autoselected;
     public static Timer timer = new Timer();
-    // public static WPI_VictorSPX L = new WPI_VictorSPX(6);
-    // public static WPI_VictorSPX R = new WPI_VictorSPX(7);
-    // public static WPI_VictorSPX top = new WPI_VictorSPX(0);
-    public static VictorSP L = new VictorSP(0);
-    public static VictorSP R = new VictorSP(1);
+    public static WPI_VictorSPX L = new WPI_VictorSPX(13);
+    public static WPI_VictorSPX R = new WPI_VictorSPX(12);
+    public static WPI_VictorSPX top = new WPI_VictorSPX(0);
+    // public static VictorSP L = new VictorSP(0);
+    // public static VictorSP R = new VictorSP(1);
 
-    //public static AHRS gyro = new AHRS(SPI.Port.kMXP);
-    public static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+    public static AHRS gyro = new AHRS(SPI.Port.kMXP);
+    // public static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 
     public static int a = 0;
 
@@ -33,14 +33,16 @@ public class auto {
         chooser.setDefaultOption("shootball", kshootball);
         chooser.addOption("donothing", donothing);
         chooser.addOption("outcommunity", outcommunity);
+        
+        SmartDashboard.putData("Auto Choise", chooser);
     }
 
     public static void start() {
-        SmartDashboard.putData("Auto Choise", chooser);
-       // autoselected = chooser.getSelected();
+        // autoselected = chooser.getSelected();
         gyro.reset();
         timer.reset();
         timer.start();
+        ServoController.servoSet(0);
     }
 
     public static void loop() {
@@ -53,16 +55,15 @@ public class auto {
                 R.set(0);
                 break;
             case outcommunity:
-                    if (timer.get() < 3) {
-                        L.set(0.5);
-                        R.set(-0.5);
-                    } else {
-                        timer.stop();
-                    }
-                    break;
-            default:
+                if (timer.get() <1.5) {
+                    L.set(0.5);
+                    R.set(-0.5);
+                } else {
+                    timer.stop();
+                }
+                break;
+            default:    
 
-                
         }
     }
 
@@ -109,19 +110,19 @@ public class auto {
             }
 
         } else if (a == 1) {
-         if(gyro.getAngle()>90){
-            L.set(0.3);
-            R.set(0.3);
-         } else{
-            a=2;
-            timer.reset();
-            timer.start();
-            L.set(0);
-            R.set(0);
-         }
+            if (gyro.getAngle() > 90) {
+                L.set(0.3);
+                R.set(0.3);
+            } else {
+                a = 2;
+                timer.reset();
+                timer.start();
+                L.set(0);
+                R.set(0);
+            }
 
-        }else if(a==2){
-             if (timer.get() < 1) {
+        } else if (a == 2) {
+            if (timer.get() < 1) {
                 L.set(0.2);
                 R.set(-0.2);
             } else {
@@ -131,13 +132,16 @@ public class auto {
                 R.set(0);
                 a = 3;
             }
-        }else if (a==3){
-            if(timer.get()<5){
-           // top.set(0.2);     
-        }else{
-            a=4;
-        }
+        } else if (a == 3) {
+            if (timer.get() < 5) {
+                ServoController.servoSet(0.5);
+                top.set(0.2);
+            } else {
+                a = 4;
+                top.set(0);
+                ServoController.servoSet(0);
+            }
 
+        }
     }
-}
 }
